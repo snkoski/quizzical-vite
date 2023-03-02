@@ -1,0 +1,163 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #0B2434;
+  padding: 20px;
+  font-family: 'Karla', sans-serif;
+  font-size: 16px;
+  color: #293264;
+  font-weight: 700;
+}
+
+main {
+  background-color: #F5F7FB;
+  height: 400px;
+  width: 550px;
+  height: 550px;
+  margin: auto;
+  overflow: auto;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  padding-top: 150px;
+}
+
+.start-button {
+  padding: 16px 40px;
+  background-color: #4D5B9E;
+  border: none;
+  border-radius: 15px;
+  margin-top: 20px;
+  color: white;
+  font-size: 1.125rem;
+  letter-spacing: .15em;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+p {
+  font-weight: 400;
+  font-size: 1.125rem; 
+}
+
+.quiz-container {
+  padding: 5px 75px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.quiz-heading {
+  margin: 30px auto 10px;
+}
+
+.quiz-subhead {
+  margin: 0 auto 20px;
+}
+
+.question {
+  font-size:  1rem;  
+}
+
+hr {
+  margin-top: 20px;
+  border: 0.8px solid #DBDEF0;
+}
+
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+ul {
+  list-style: none;
+}
+
+.answer-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 0;
+  width: 400px;
+}
+
+.answer-button {
+  font-family: 'Karla';
+  font-size: .7rem;
+  border: .8px #4D5B9E solid;
+  color: #4D5B9E;
+  background: white;
+  border-radius: 8px;
+  padding: 3px 15px;
+  width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center; 
+  cursor: pointer;
+  text-align: center;
+}
+
+.clicked {
+  background: #bdc2da;
+  border: 1.5px #4D5B9E solid;
+}
+.correct {
+  background: #94D7A2;
+  border: .8px #94D7A2 solid;
+}
+
+.incorrect {
+  background: #F8BCBC;
+  border: .8px #F8BCBC solid;
+  color: #a6a7aa;
+}
+
+.unselected {
+  color: #a6a7aa;
+  border: .8px #a6a7aa solid;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0 10px ;
+}
+.quiz-button {
+  /* margin: 25px 0 10px; */
+  padding: 12px 25px;
+  background-color: #4D5B9E;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-size: .75rem;
+  letter-spacing: .1em;
+  font-weight: 500;
+  
+}
+
