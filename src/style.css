@@ -118,7 +118,6 @@ ul {
   align-items: center; 
   cursor: pointer;
   text-align: center;
-
 }
 
 .clicked {
@@ -150,8 +149,8 @@ ul {
   width: 100%;
   padding: 20px 0 10px;
 }
+
 .quiz-button {
-  /* margin: 25px 0 10px; */
   padding: 13px 25px;
   background-color: #4D5B9E;
   border: none;
@@ -162,17 +161,25 @@ ul {
   font-weight: 500; 
 }
 
-@media (min-width: 700px) {
+Look  into why  the below media query is not working
+
+/* @media (min-width: 500px) {
   .quiz-container {
     padding: 5px 80px 30px;
-    /* display: flex;
-    flex-direction: column;
-    align-items: flex-start;   */
   }
 
   .question {
     font-size: 1.125rem;    
   }
 
-}
+  .answer-button {
+    width: 148px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;  
+  
+  }
+
+} */
 
