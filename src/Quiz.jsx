@@ -30,7 +30,7 @@ export default function Quiz ({ playAgain }) {
   }
 
   const createCards = quizData.map((item) => (
-    <div>
+    <div className="card-container">
       <Card
         key={item.key}
         question={item.question}
@@ -56,7 +56,7 @@ export default function Quiz ({ playAgain }) {
   return (
     <div className="quiz-container">
       <h2 className="quiz-heading">QUIZ TIME! </h2>
-      <h5 className="quiz-subhead">5 questions total (scroll for more).</h5>
+      <h5 className="quiz-subhead">5 questions total (scroll for more)</h5>
       {createCards}
       <div className="button-container">
         <h4>{showAnswers ? `You scored ${score} out of ${quizData.length}` : ""}</h4>

@@ -16,7 +16,7 @@ function App() {
   
   return (
     <main>
-      <div className="blog">
+      <div>
       { start ? 
         <Quiz playAgain={playAgain} /> : 
         <Intro start={startQuiz} /> 

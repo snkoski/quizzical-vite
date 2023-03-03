@@ -12,8 +12,9 @@
 body {
   margin: 0;
   background-color: #0B2434;
-  padding: 20px;
+  padding: 20px 0;
   font-family: 'Karla', sans-serif;
+  font-weight: 400; 
   font-size: 16px;
   color: #293264;
   font-weight: 700;
@@ -22,7 +23,8 @@ body {
 main {
   background-color: #F5F7FB;
   height: 400px;
-  width: 550px;
+  width: 95%;
+  max-width: 800px;
   height: 550px;
   margin: auto;
   overflow: auto;
@@ -56,16 +58,16 @@ h1 {
   margin: 0;
 }
 
-p {
-  font-weight: 400;
-  font-size: 1.125rem; 
+.card-container {
+  text-align: left;
+  width: 100%;
 }
 
 .quiz-container {
-  padding: 5px 75px 30px;
+  padding: 5px 60px 30px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-start;  
 }
 
 .quiz-heading {
@@ -77,18 +79,13 @@ p {
 }
 
 .question {
-  font-size:  1rem;  
+  font-size: 1.125rem; 
+  font-weight: 500; 
 }
 
 hr {
-  margin-top: 20px;
+  margin-bottom: 25px;
   border: 0.8px solid #DBDEF0;
-}
-
-
-.buttons {
-  display: flex;
-  gap: 15px;
 }
 
 ul {
@@ -97,27 +94,31 @@ ul {
 
 .answer-container {
   display: flex;
-  justify-content: flex-start;
-  gap: 5px;
-  padding: 0;
-  width: 400px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 10px 0 30px;
+  width: 100%;
+  /* border: red 1px solid; */
 }
 
 .answer-button {
-  font-family: 'Karla';
-  font-size: .7rem;
+  font-weight: 400;
+  font-size: .75rem;
+  line-height: 1rem;
   border: .8px #4D5B9E solid;
   color: #4D5B9E;
   background: white;
   border-radius: 8px;
-  padding: 3px 15px;
-  width: 200px;
+  padding: 5px 15px;
+  width: 175px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center; 
   cursor: pointer;
   text-align: center;
+
 }
 
 .clicked {
@@ -127,6 +128,7 @@ ul {
 .correct {
   background: #94D7A2;
   border: .8px #94D7A2 solid;
+  font-weight: 500;
 }
 
 .incorrect {
@@ -146,18 +148,31 @@ ul {
   gap: 15px;
   align-items: center;
   width: 100%;
-  padding: 20px 0 10px ;
+  padding: 20px 0 10px;
 }
 .quiz-button {
   /* margin: 25px 0 10px; */
-  padding: 12px 25px;
+  padding: 13px 25px;
   background-color: #4D5B9E;
   border: none;
   border-radius: 15px;
   color: white;
   font-size: .75rem;
   letter-spacing: .1em;
-  font-weight: 500;
-  
+  font-weight: 500; 
+}
+
+@media (min-width: 700px) {
+  .quiz-container {
+    padding: 5px 80px 30px;
+    /* display: flex;
+    flex-direction: column;
+    align-items: flex-start;   */
+  }
+
+  .question {
+    font-size: 1.125rem;    
+  }
+
 }
 
