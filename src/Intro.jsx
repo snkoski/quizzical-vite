@@ -1,11 +1,12 @@
 import { useState } from "react"
 import Form from "./introComponents/Form";
 
-export default function Intro ({ start }) {
+export default function Intro ({ start, updateUserChoices }) {
  /* Starts the quiz. Button makes start state true. If start=true, the Quiz component is activated. */
   const [number, setNumber] = useState(5);
   const [difficulty, setDifficulty] = useState("")
   const [category, setCategory] = useState("")
+  
 
   const handleChange = (event) => {
     const input = event.target;
@@ -26,12 +27,15 @@ export default function Intro ({ start }) {
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log( { number })
-    console.log ({ difficulty } )
-    console.log ({ category } )
-  };
+  const handleStart = function () {
+    start();
+    updateUserChoices(number, difficulty, category)
+    // console.log( { number })
+    // console.log ({ difficulty } )
+    // console.log ({ category } )
+  }
+  //   do I need event.preventDefault() ???
+
 
   return (
     <div className="intro">  
@@ -39,11 +43,9 @@ export default function Intro ({ start }) {
         <p>A rad way to put your knowlege to the test!</p>
         <Form
         number={number}
-        difficulty={difficulty}
-        category={category}
         handleChange={handleChange}
-        handleSubmit={handleSubmit}
       />
-        <button className="start-button" onClick={start}>Start quiz</button>
+        <button className="start-button" onClick={handleStart}>Start quiz</button>
+      
     </div>
   )}

@@ -2,14 +2,14 @@ import { useState, useEffect} from "react"
 import Card from "./components/Card"
 import { v4 as uuid } from 'uuid'
 
-export default function Quiz ({ playAgain }) {
+export default function Quiz ({ playAgain, number, difficulty, category }) {
 //Holds the quiz object array  
  const [quizData, setQuizData] = useState([]) 
  const [showAnswers, setShowAnswers] = useState(false)
  const [score, setScore] = useState(0)
 
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&category=17&difficulty=easy&type=multiple")
+    fetch(`https://opentdb.com/api.php?amount=${number}&category=${category}&difficulty=${difficulty}&type=multiple`)
       .then((res) => res.json())
       .then((data) =>
         setQuizData(
@@ -19,7 +19,7 @@ export default function Quiz ({ playAgain }) {
           }))
         )
       );
-      console.log(quizData) // shows this is running twice
+      console.log(quizData) // shows this is running twice????
   }, []);
 
   //sets the score

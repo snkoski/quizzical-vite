@@ -52,8 +52,8 @@ main {
 .form-item {
   display: flex;
   justify-content: space-between;
-
-  width: 380px;
+  align-items: center;
+  width: 373px;
 }
 
 input, select {

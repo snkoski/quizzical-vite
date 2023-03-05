@@ -1,6 +1,8 @@
-export default function Form({ number, handleChange, handleSubmit }) {
+// export default function Form({ number, handleChange, handleSubmit }) {
+export default function Form({ number, handleChange, handleSubmit, formRef }) {
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
+    // <form className="form-container" onSubmit={handleSubmit}>
+    <form className="form-container">
       <div className="form-item">
         <label htmlFor="number">Number of questions:</label>
         <input
@@ -42,7 +44,7 @@ export default function Form({ number, handleChange, handleSubmit }) {
       </div>
       
       
-    <button type="submit">Submit</button>
+    {/* <button type="submit">Submit</button> */}
   </form>
   );
 }
