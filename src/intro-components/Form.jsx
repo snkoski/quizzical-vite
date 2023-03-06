@@ -43,7 +43,7 @@ export default function Form({ number, handleChange }) {
         </select>
       </div>
       <div>
-        <label htmlFor="timed">Beat the countdown clock:</label>
+        <label htmlFor="timed">Timed quiz:</label>
         <input 
           id="timed"
           name="timed"

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Form from "./introComponents/Form";
+import Form from "./intro-components/Form";
 
 export default function Intro ({ start, updateUserChoices }) {
 
