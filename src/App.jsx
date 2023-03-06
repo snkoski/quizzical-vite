@@ -8,23 +8,25 @@ function App() {
   const [userChoices, setUserChoices] = useState({
       number: 5,
       difficulty: "",
-      category: ""
+      category: "",
+      isTimed: true
   })
 
-  function handleUserChoices (number, difficulty, category) {
+  function handleUserChoices (number, difficulty, category, isTimed) {
     setUserChoices({
       ...userChoices,
       number: number,
       difficulty: difficulty,
-      category: category
+      category: category,
+      isTimed: isTimed
     });  
    
   }
-
+//this is just used for testing at the moment
   useEffect(() => {
     console.log(userChoices)
   }, [userChoices])
-  
+  //isTimed currently is "undefined"???
   
   
   function startQuiz() {
@@ -36,7 +38,8 @@ function App() {
     setUserChoices({
       number: 5,
       difficulty: "",
-      category: ""
+      category: "",
+      isTimed: true 
     })
   }
   
@@ -48,7 +51,9 @@ function App() {
           playAgain={playAgain} 
           number={userChoices.number}
           difficulty={userChoices.difficulty} 
-          category={userChoices.category}/> : 
+          category={userChoices.category}
+          isTimed={userChoices.isTimed}
+        /> : 
         <Intro 
           start={startQuiz} 
           updateUserChoices={handleUserChoices}

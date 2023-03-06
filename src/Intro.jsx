@@ -2,10 +2,11 @@ import { useState } from "react"
 import Form from "./introComponents/Form";
 
 export default function Intro ({ start, updateUserChoices }) {
- /* Starts the quiz. Button makes start state true. If start=true, the Quiz component is activated. */
+
   const [number, setNumber] = useState(5);
   const [difficulty, setDifficulty] = useState("")
   const [category, setCategory] = useState("")
+  const [isTimed, setIsTimed] = useState(true)
   
 
   const handleChange = (event) => {
@@ -24,6 +25,9 @@ export default function Intro ({ start, updateUserChoices }) {
     }
     if(input.name ==="category") {
       setCategory(numValue) 
+    }
+    if(input.name ==="timed") {
+      setIsTimed(!isTimed)
     }
   };
 

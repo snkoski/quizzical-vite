@@ -1,5 +1,5 @@
 // export default function Form({ number, handleChange, handleSubmit }) {
-export default function Form({ number, handleChange, handleSubmit, formRef }) {
+export default function Form({ number, handleChange }) {
   return (
     // <form className="form-container" onSubmit={handleSubmit}>
     <form className="form-container">
@@ -42,9 +42,16 @@ export default function Form({ number, handleChange, handleSubmit, formRef }) {
           <option value="28">Vehicles</option>
         </select>
       </div>
-      
-      
-    {/* <button type="submit">Submit</button> */}
-  </form>
+      <div>
+        <label htmlFor="timed">Beat the countdown clock:</label>
+        <input 
+          id="timed"
+          name="timed"
+          type="checkbox"
+          onChange={handleChange}
+          defaultChecked
+        />
+      </div>  
+      </form>
   );
 }

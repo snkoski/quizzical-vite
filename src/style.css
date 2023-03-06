@@ -96,7 +96,12 @@ h1 {
 }
 
 .quiz-subhead {
+  margin: 0 auto 10px;
+}
+
+.quiz-timer {
   margin: 0 auto 20px;
+  color: orange;
 }
 
 .question {
@@ -182,7 +187,7 @@ ul {
   font-weight: 500; 
 }
 
-Look  into why  the below media query is not working
+
 
 /* @media (min-width: 500px) {
   .quiz-container {
