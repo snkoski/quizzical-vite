@@ -56,6 +56,7 @@ function App() {
         /> : 
         <Intro 
           start={startQuiz} 
+          isTimed={userChoices.isTimed}
           updateUserChoices={handleUserChoices}
         /> 
       }

@@ -1,12 +1,12 @@
 import { useState } from "react"
 import Form from "./intro-components/Form";
 
-export default function Intro ({ start, updateUserChoices }) {
+export default function Intro ({ start, isTimed, updateUserChoices }) {
 
   const [number, setNumber] = useState(5);
   const [difficulty, setDifficulty] = useState("")
   const [category, setCategory] = useState("")
-  const [isTimed, setIsTimed] = useState(true)
+  const [useFormTimer, setUseFormTimer] = useState(true)
   
 
   const handleChange = (event) => {
@@ -27,7 +27,7 @@ export default function Intro ({ start, updateUserChoices }) {
       setCategory(numValue) 
     }
     if(input.name ==="timed") {
-      setIsTimed(!isTimed)
+      setUseFormTimer(!isTimed)
     }
   };
 
@@ -47,6 +47,7 @@ export default function Intro ({ start, updateUserChoices }) {
         <p>A rad way to put your knowlege to the test!</p>
         <Form
         number={number}
+        isTimed={isTimed}
         handleChange={handleChange}
       />
         <button className="start-button" onClick={handleStart}>Start quiz</button>

@@ -1,5 +1,5 @@
 // export default function Form({ number, handleChange, handleSubmit }) {
-export default function Form({ number, handleChange }) {
+export default function Form({ number, isTimed, handleChange }) {
   return (
     // <form className="form-container" onSubmit={handleSubmit}>
     <form className="form-container">

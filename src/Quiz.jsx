@@ -8,10 +8,13 @@ export default function Quiz ({ playAgain, number, difficulty, category }) {
  const [quizData, setQuizData] = useState([]) 
  const [showAnswers, setShowAnswers] = useState(false)
  const [score, setScore] = useState(0)
+ const [showTime, setShowTime] = useState(true)
+ const [stopTime, setStopTime] = useState(false)
 
 function handleButtonClick () {
   if (showAnswers === false) {
     setShowAnswers(true)
+    setStopTime(true)
      //this will be where calling a  stop timer function  will be called
   } else {
     playAgain()
@@ -33,11 +36,6 @@ function handleButtonClick () {
       console.log(quizData) // shows this is running twice????
   }, []);
 
-  
-
-
-
-
   //sets the score
   function handleGotCorrect(gotCorrect) {
     if(gotCorrect===true) {
@@ -45,8 +43,9 @@ function handleButtonClick () {
     }
   }
 
-  const createCards = quizData.map((item) => (
+  const createCards = quizData.map((item, index) => (
     <div className="card-container">
+      <span className="card-number">{index + 1}</span>
       <Card
         key={item.key}
         question={item.question}
@@ -65,7 +64,7 @@ function handleButtonClick () {
     <div className="quiz-container">
       <h2 className="quiz-heading">QUIZ TIME! </h2>
       <h5 className="quiz-subhead">{number} questions total (scroll for more)</h5>
-      <Timer />
+      <Timer stopTime={stopTime}/>
       {createCards}
       <div className="button-container">
         <h4>{showAnswers ? `You scored ${score} out of ${quizData.length}` : ""}</h4>
