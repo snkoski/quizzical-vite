@@ -12,15 +12,14 @@ function App() {
       isTimed: true
   })
 
-  function handleUserChoices (number, difficulty, category, isTimed) {
+  function handleUserChoices (number, difficulty, category, banana) {
     setUserChoices({
       ...userChoices,
       number: number,
       difficulty: difficulty,
       category: category,
-      isTimed: isTimed
+      isTimed: banana
     });  
-   
   }
 //this is just used for testing at the moment
   useEffect(() => {
@@ -56,8 +55,7 @@ function App() {
         /> : 
         <Intro 
           start={startQuiz} 
-          isTimed={userChoices.isTimed}
-          updateUserChoices={handleUserChoices}
+          handleUserChoices={handleUserChoices}
         /> 
       }
       </div>

@@ -48,7 +48,7 @@ export default function Form({ number, isTimed, handleChange }) {
           id="timed"
           name="timed"
           type="checkbox"
-          onChange={handleChange}
+          onChange={handleChange} //called in Intro
           defaultChecked
         />
       </div>  

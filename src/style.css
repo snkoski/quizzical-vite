@@ -81,9 +81,8 @@ h1 {
 
 .card-container {
   text-align: left;
-  display: flex;
-  width: 100%; 
-  border: red, solid, 1px;
+  /* display: flex; */
+  width: 100%;
 }
 
 .quiz-container {

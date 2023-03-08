@@ -1,14 +1,13 @@
 import { useState } from "react"
 import Form from "./intro-components/Form";
 
-export default function Intro ({ start, isTimed, updateUserChoices }) {
+export default function Intro ({ start, handleUserChoices }) {
 
   const [number, setNumber] = useState(5);
   const [difficulty, setDifficulty] = useState("")
   const [category, setCategory] = useState("")
-  const [useFormTimer, setUseFormTimer] = useState(true)
+  const [banana, setBanana] = useState(true)
   
-
   const handleChange = (event) => {
     const input = event.target;
     const numValue = parseInt(input.value, 10);
@@ -23,20 +22,18 @@ export default function Intro ({ start, isTimed, updateUserChoices }) {
     if (input.name === "difficulty")  {
       setDifficulty(input.value) 
     }
-    if(input.name ==="category") {
+    if(input.name === "category") {
       setCategory(numValue) 
     }
-    if(input.name ==="timed") {
-      setUseFormTimer(!isTimed)
+    if(input.name === "timed") {
+      setBanana(!banana)
+      console.log( {banana} ) // this works
     }
   };
 
   const handleStart = function () {
     start();
-    updateUserChoices(number, difficulty, category)
-    // console.log( { number })
-    // console.log ({ difficulty } )
-    // console.log ({ category } )
+    handleUserChoices(number, difficulty, category, banana)// correctly updates!
   }
   //   do I need event.preventDefault() ???
 
@@ -47,8 +44,8 @@ export default function Intro ({ start, isTimed, updateUserChoices }) {
         <p>A rad way to put your knowlege to the test!</p>
         <Form
         number={number}
-        isTimed={isTimed}
         handleChange={handleChange}
+        // useFormTimer={timerOff}
       />
         <button className="start-button" onClick={handleStart}>Start quiz</button>
       

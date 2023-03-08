@@ -3,13 +3,12 @@ import Card from "./quiz-components/Card"
 import Timer from "./quiz-components/Timer"
 import { v4 as uuid } from 'uuid'
 
-export default function Quiz ({ playAgain, number, difficulty, category }) {
+export default function Quiz ({ playAgain, number, difficulty, category, isTimed }) {
 //Holds the quiz object array  
  const [quizData, setQuizData] = useState([]) 
  const [showAnswers, setShowAnswers] = useState(false)
  const [score, setScore] = useState(0)
- const [showTime, setShowTime] = useState(true)
- const [stopTime, setStopTime] = useState(false)
+ const [stopTime, setStopTime] = useState(true)
 
 function handleButtonClick () {
   if (showAnswers === false) {
@@ -64,7 +63,7 @@ function handleButtonClick () {
     <div className="quiz-container">
       <h2 className="quiz-heading">QUIZ TIME! </h2>
       <h5 className="quiz-subhead">{number} questions total (scroll for more)</h5>
-      <Timer stopTime={stopTime}/>
+      { isTimed && <Timer stopTime={stopTime}/> }
       {createCards}
       <div className="button-container">
         <h4>{showAnswers ? `You scored ${score} out of ${quizData.length}` : ""}</h4>
