@@ -8,12 +8,12 @@ export default function Quiz ({ playAgain, number, difficulty, category, isTimed
  const [quizData, setQuizData] = useState([]) 
  const [showAnswers, setShowAnswers] = useState(false)
  const [score, setScore] = useState(0)
- const [stopTime, setStopTime] = useState(true)
+ const [chicken, setChicken] = useState(true)
 
 function handleButtonClick () {
   if (showAnswers === false) {
     setShowAnswers(true)
-    setStopTime(true)
+    setChicken(false)
      //this will be where calling a  stop timer function  will be called
   } else {
     playAgain()
@@ -63,7 +63,7 @@ function handleButtonClick () {
     <div className="quiz-container">
       <h2 className="quiz-heading">QUIZ TIME! </h2>
       <h5 className="quiz-subhead">{number} questions total (scroll for more)</h5>
-      { isTimed && <Timer stopTime={stopTime}/> }
+      { isTimed && <Timer chicken={chicken}/> }
       {createCards}
       <div className="button-container">
         <h4>{showAnswers ? `You scored ${score} out of ${quizData.length}` : ""}</h4>
