@@ -43,14 +43,18 @@ export default function Form({ number, isTimed, handleChange }) {
         </select>
       </div>
       <div>
-        <label htmlFor="timed">Timed quiz:</label>
-        <input 
-          id="timed"
-          name="timed"
-          type="checkbox"
-          onChange={handleChange} //called in Intro
-          defaultChecked
-        />
+      <div className="form-item checkbox-div">
+        <label htmlFor="timed" className="checkbox-container" >Timed quiz:
+          <input 
+            id="timed"
+            name="timed"
+            type="checkbox"
+            onChange={handleChange} //called in Intro
+            defaultChecked
+          />
+          <span className="checkmark"></span>
+          </label>
+        </div>
       </div>  
       </form>
   );

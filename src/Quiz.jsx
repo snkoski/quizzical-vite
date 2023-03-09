@@ -2,6 +2,8 @@ import { useState, useEffect, useRef} from "react"
 import Card from "./quiz-components/Card"
 import Timer from "./quiz-components/Timer"
 import { v4 as uuid } from 'uuid'
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
 
 export default function Quiz ({ playAgain, number, difficulty, category, isTimed }) {
 //Holds the quiz object array  
@@ -9,6 +11,7 @@ export default function Quiz ({ playAgain, number, difficulty, category, isTimed
  const [showAnswers, setShowAnswers] = useState(false)
  const [score, setScore] = useState(0)
  const [chicken, setChicken] = useState(true)
+ const { width, height } = useWindowSize()
 
 function handleButtonClick () {
   if (showAnswers === false) {
@@ -42,9 +45,30 @@ function handleButtonClick () {
     }
   }
 
+  //returns score message
+  function renderScore () {
+  
+    if (score === quizData.length) {
+      <div>
+          <Confetti 
+            width={width}
+            height={height}
+          />
+          <p>CONGRATS! You scored {score} out of {quizData.length}!</p>
+        </div>
+    } else if (score >= quizData.length / 2) {
+      return `Well done! You scored ${score} out of ${quizData.length}!`
+    } else if (score > 0) {
+      return `Good effort: You scored ${score} out of ${quizData.length}.`
+    } else {  
+      return `Sorry, you scored ${score} out of ${quizData.length}.` 
+    }
+  }
+
   const createCards = quizData.map((item, index) => (
-    <div className="card-container">
-      <span className="card-number">{index + 1}</span>
+    <div className="card-container"> 
+      <div className="card-subcontainer">
+      <span className="card-number">{index + 1})</span>
       <Card
         key={item.key}
         question={item.question}
@@ -53,6 +77,7 @@ function handleButtonClick () {
         showAnswers={showAnswers}
         gotCorrect={handleGotCorrect}
       />
+      </div>
       <hr></hr>
     </div>
   ))
@@ -66,7 +91,7 @@ function handleButtonClick () {
       { isTimed && <Timer chicken={chicken}/> }
       {createCards}
       <div className="button-container">
-        <h4>{showAnswers ? `You scored ${score} out of ${quizData.length}` : ""}</h4>
+        <h4>{showAnswers ? renderScore() : ""}</h4>
         <button 
           className="quiz-button" 
           onClick={()=>handleButtonClick()}>

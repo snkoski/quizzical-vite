@@ -27,9 +27,9 @@ main {
   /* background-color: #F5F7FB; */
   background-color: rgba(253, 253, 250, 0.96);
   height: 400px;
-  width: 95%;
-  max-width: 800px;
-  height: 550px;
+  width:95%;
+  max-width: 850px;
+  height: 570px;
   margin: auto;
   overflow: auto;
 }
@@ -49,39 +49,118 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  width: 70%;
-  padding: 20px;
+  /* width: 90%; */
+  width: 355px;
+  padding: 20px 0;
 }
 
 .form-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 373px;
+  width: 100%;
 }
 
 input, select {
   padding: 8px;
-  width: 200px;
+  width: 180px;
 }
+
 
 label {
   font-weight: 700;
 }
 
 
+/* ---------- START Checkmark box styles ---------- */
+
+/* Customize the the container) */
+.checkbox-div {
+  padding-top: 20px;
+  display: flex;
+}
+
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-right: 35px;
+  padding-top: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border: 1px solid #515168;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #2cacd1;
+  border: 1px solid #2cacd1;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* ---------- END checkmark box styles ---------- */
 
 .start-button {
-  padding: 16px 40px;
+  padding: 13px 40px;
   background-color: #2cacd1;
   border: none;
   border-radius: 15px;
-  margin-top: 20px;
+  margin-top: 15px;
   color: white;
-  font-family: 'Jura', sans-serif;
   font-weight: 700;
-  font-size: 1.25rem;
-  letter-spacing: .15em;
+  font-size: 1rem;
+  letter-spacing: .1em;
   font-weight: 500;
   cursor: pointer;
 }
@@ -95,35 +174,53 @@ h1 {
 }
 
 .subhead {
-  font-family: 'Jura', sans-serif;
+  font-family: 'Karla', sans-serif;
   font-weight: 500;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
 .card-container {
   text-align: left;
-  /* display: flex; */
   width: 100%;
 }
 
+.card-subcontainer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.card-number {
+  padding: 16px 10px 0 0;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
 .quiz-container {
-  padding: 5px 60px 30px;
+  padding: 5px 50px 30px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;  
+  align-items: flex-start; 
 }
 
 .quiz-heading {
   margin: 30px auto 10px;
+  font-family: 'Jura', sans-serif;
+  font-weight: 700;
+  font-size: 2.25rem;
+  color: #2cacd1;
 }
 
 .quiz-subhead {
   margin: 0 auto 10px;
+  
 }
 
 .quiz-timer {
   margin: 0 auto 20px;
-  color: orange;
+  color: #ea1d24;
+  /* font-family: 'Jura', sans-serif; */
+  font-weight: 500;
+  font-size: 1.5rem; 
 }
 
 .question {
@@ -147,15 +244,14 @@ ul {
   gap: 15px;
   padding: 10px 0 30px;
   width: 100%;
-  /* border: red 1px solid; */
 }
 
 .answer-button {
   font-weight: 400;
   font-size: .75rem;
   line-height: 1rem;
-  border: .8px #4D5B9E solid;
-  color: #4D5B9E;
+  border: .8px #515168 solid;
+  color: #515168;
   background: white;
   border-radius: 8px;
   padding: 5px 15px;
@@ -170,7 +266,7 @@ ul {
 
 .clicked {
   background: #bdc2da;
-  border: 1.5px #4D5B9E solid;
+  border: 1.5px #515168 solid;
 }
 .correct {
   background: #94D7A2;
@@ -200,22 +296,27 @@ ul {
 
 .quiz-button {
   padding: 13px 25px;
-  background-color: #4D5B9E;
+  background-color: #2cacd1;
+  font-weight: 500;
   border: none;
   border-radius: 15px;
   color: white;
-  font-size: .75rem;
+  font-size: 1rem;
   letter-spacing: .1em;
-  font-weight: 500; 
 }
 
 
 
- @media  only screen and (min-width: 500px) {
+ @media only screen and (min-width: 500px) {
 
-h1 { 
-  font-size: 3.5rem;
-}
+  h1 { 
+    font-size: 3.5rem;
+  }
+
+  .subhead {
+    font-size: 1.25rem;
+  }
+
   .quiz-container {
     padding: 5px 80px 30px;
   }
@@ -230,8 +331,8 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;  
-  
   }
+}
 
-} 
+ 
 
