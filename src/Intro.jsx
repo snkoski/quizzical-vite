@@ -41,7 +41,7 @@ export default function Intro ({ start, handleUserChoices }) {
   return (
     <div className="intro">  
         <h1>Totally Quizzical</h1>
-        <p>A rad way to put your knowlege to the test!</p>
+        <p className="subhead">A rad way to put your knowlege to the test!</p>
         <Form
         number={number}
         handleChange={handleChange}

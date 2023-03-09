@@ -11,17 +11,21 @@
 
 body {
   margin: 0;
-  background-color: #0B2434;
+  background-image: url('assets/background.jpg');
+  background-size: cover;
+  background-repeat: repeat;
+  /* background-color: #0B2434; */
   padding: 20px 0;
   font-family: 'Karla', sans-serif;
   font-weight: 400; 
   font-size: 16px;
-  color: #293264;
+  color: #515168;
   font-weight: 700;
 }
 
 main {
-  background-color: #F5F7FB;
+  /* background-color: #F5F7FB; */
+  background-color: rgba(253, 253, 250, 0.96);
   height: 400px;
   width: 95%;
   max-width: 800px;
@@ -37,7 +41,7 @@ main {
   align-items: center;
   text-align: center;
   margin: auto;
-  padding-top: 150px;
+  padding-top: 80px;
 }
 
 .form-container {
@@ -61,22 +65,39 @@ input, select {
   width: 200px;
 }
 
+label {
+  font-weight: 700;
+}
+
+
+
 .start-button {
   padding: 16px 40px;
-  background-color: #4D5B9E;
+  background-color: #2cacd1;
   border: none;
   border-radius: 15px;
   margin-top: 20px;
   color: white;
-  font-size: 1.125rem;
+  font-family: 'Jura', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
   letter-spacing: .15em;
   font-weight: 500;
   cursor: pointer;
 }
 
 h1 {
-  font-size: 2rem;
+  font-family: 'Jura', sans-serif;
+  font-weight: 700;
+  font-size: 2.25rem;
+  color: #2cacd1;
   margin: 0;
+}
+
+.subhead {
+  font-family: 'Jura', sans-serif;
+  font-weight: 500;
+  font-size: 1.125rem;
 }
 
 .card-container {
@@ -190,7 +211,11 @@ ul {
 
 
 
-/* @media (min-width: 500px) {
+ @media  only screen and (min-width: 500px) {
+
+h1 { 
+  font-size: 3.5rem;
+}
   .quiz-container {
     padding: 5px 80px 30px;
   }
@@ -208,5 +233,5 @@ ul {
   
   }
 
-} */
+} 
 
