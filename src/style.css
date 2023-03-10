@@ -26,9 +26,11 @@ body {
 main {
   /* background-color: #F5F7FB; */
   background-color: rgba(253, 253, 250, 0.96);
+  border: 15px solid transparent;
+  border-radius: 1rem;
   height: 400px;
   width:95%;
-  max-width: 850px;
+  max-width: 860px;
   height: 570px;
   margin: auto;
   overflow: auto;
@@ -41,7 +43,7 @@ main {
   align-items: center;
   text-align: center;
   margin: auto;
-  padding-top: 80px;
+  padding-top: 60px;
 }
 
 .form-container {
@@ -61,14 +63,45 @@ main {
   width: 100%;
 }
 
-input, select {
+/* input, select {
   padding: 8px;
   width: 180px;
-}
+} */
 
 
 label {
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* removes the preset webstyles */
+input,
+legend,
+select,
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* adds the custom form webstyles */
+input,
+select,
+textarea {
+  border: 1.5px solid #2cacd1;
+  background-color: white;
+  font-family: 'Karla', sans-serif;
+  font-weight: 500; 
+  font-size: .9rem;
+  color: #515168;
+  border-radius: 0.25rem;
+  padding: 8px;
+  width: 180px;
 }
 
 
@@ -110,7 +143,8 @@ label {
   height: 25px;
   width: 25px;
   background-color: #eee;
-  border: 1px solid #515168;
+  border: 1.5px solid #2cacd1;
+  border-radius: 0.25rem;
 }
 
 /* On mouse-over, add a grey background color */
@@ -158,10 +192,10 @@ label {
   border-radius: 15px;
   margin-top: 15px;
   color: white;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 1rem;
   letter-spacing: .1em;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -193,6 +227,11 @@ h1 {
   padding: 16px 10px 0 0;
   font-size: 1.25rem;
   font-weight: 400;
+}
+
+.loading-svg {
+  width: 100%;
+  padding-top: 150px;
 }
 
 .quiz-container {
@@ -291,7 +330,8 @@ ul {
   gap: 15px;
   align-items: center;
   width: 100%;
-  padding: 20px 0 10px;
+  padding: 20px 0 35px;
+
 }
 
 .quiz-button {
@@ -303,6 +343,7 @@ ul {
   color: white;
   font-size: 1rem;
   letter-spacing: .1em;
+  font-weight: 700;
 }
 
 

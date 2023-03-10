@@ -1,27 +1,40 @@
 import { useState, useEffect, useRef} from "react"
 import Card from "./quiz-components/Card"
 import Timer from "./quiz-components/Timer"
+import Loading from "./quiz-components/Loading"
 import { v4 as uuid } from 'uuid'
 import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
 
 export default function Quiz ({ playAgain, number, difficulty, category, isTimed }) {
 //Holds the quiz object array  
- const [quizData, setQuizData] = useState([]) 
- const [showAnswers, setShowAnswers] = useState(false)
- const [score, setScore] = useState(0)
- const [chicken, setChicken] = useState(true)
- const { width, height } = useWindowSize()
+  const [quizData, setQuizData] = useState([]) 
+  const [showAnswers, setShowAnswers] = useState(false)
+  const [score, setScore] = useState(0)
+  const [chicken, setChicken] = useState(false) // starts/stops the timer
+  const { width, height } = useWindowSize()
+  const [loading, setLoading] = useState(true)
 
-function handleButtonClick () {
-  if (showAnswers === false) {
-    setShowAnswers(true)
-    setChicken(false)
-     //this will be where calling a  stop timer function  will be called
-  } else {
-    playAgain()
-  } 
-}
+  useEffect(()=> {
+    const loadingTimer = setTimeout(() => {
+      setLoading(false)
+      setChicken(true)
+    }, 1500);
+
+    return () => clearTimeout(loadingTimer); //explain this line?
+  }, [])
+
+ 
+
+  function handleButtonClick () {
+    if (showAnswers === false) {
+      setShowAnswers(true)
+      setChicken(false)
+      //this will be where calling a  stop timer function  will be called
+    } else {
+      playAgain()
+    } 
+  }
 
 
   useEffect(() => {
@@ -45,23 +58,24 @@ function handleButtonClick () {
     }
   }
 
-  //returns score message
+  // renders the message at the bottom of the screen
   function renderScore () {
-  
     if (score === quizData.length) {
-      <div>
+      return (
+        <div>
           <Confetti 
             width={width}
             height={height}
           />
-          <p>CONGRATS! You scored {score} out of {quizData.length}!</p>
+          <p>BOO-YAH! You scored {score} out of {quizData.length}!</p>
         </div>
+      )
     } else if (score >= quizData.length / 2) {
-      return `Well done! You scored ${score} out of ${quizData.length}!`
+      return `Word up! You scored ${score} out of ${quizData.length}!`
     } else if (score > 0) {
-      return `Good effort: You scored ${score} out of ${quizData.length}.`
+      return `Oh snap: You scored ${score} out of ${quizData.length}.`
     } else {  
-      return `Sorry, you scored ${score} out of ${quizData.length}.` 
+      return `Dang, you scored ${score} out of ${quizData.length}.` 
     }
   }
 
@@ -82,24 +96,29 @@ function handleButtonClick () {
     </div>
   ))
 
-
   /* Maps over the data in state and passes question to Card as a prop */
   return (
     <div className="quiz-container">
-      <h2 className="quiz-heading">QUIZ TIME! </h2>
-      <h5 className="quiz-subhead">{number} questions total (scroll for more)</h5>
-      { isTimed && <Timer chicken={chicken}/> }
-      {createCards}
-      <div className="button-container">
-        <h4>{showAnswers ? renderScore() : ""}</h4>
-        <button 
-          className="quiz-button" 
-          onClick={()=>handleButtonClick()}>
-            {showAnswers===false ? "Check answers" : "Play again"}
-        </button>
-      </div>  
+      { loading ? 
+        <Loading /> :  
+        <div> 
+          <h2 className="quiz-heading">Quiz time! </h2>
+          <h5 className="quiz-subhead">{number} questions total (scroll for more)</h5>
+          { isTimed && <Timer chicken={chicken}/> }
+          {createCards}
+          <div className="button-container">
+            <h4>{showAnswers ? renderScore() : ""}</h4>
+            <button 
+              className="quiz-button" 
+              onClick={()=>handleButtonClick()}>
+                {showAnswers===false ? "Check answers" : "Play again"}
+            </button>
+            </div>
+        </div>        
+        } 
     </div>
   );
+
 }
   
 
