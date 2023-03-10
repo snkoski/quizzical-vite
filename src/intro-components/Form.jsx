@@ -1,7 +1,5 @@
-// export default function Form({ number, handleChange, handleSubmit }) {
-export default function Form({ number, isTimed, handleChange }) {
+export default function Form({ number, handleChange }) {
   return (
-    // <form className="form-container" onSubmit={handleSubmit}>
     <form className="form-container">
       <div className="form-item">
         <label htmlFor="number">Number of questions:</label>
@@ -17,7 +15,7 @@ export default function Form({ number, isTimed, handleChange }) {
       <div className="form-item">
       <label htmlFor="difficulty">Select difficulty level:</label>
       <select id="difficulty" name="difficulty" onChange={handleChange}>
-        {/* <option value="">Any Difficulty</option>//value is empty - may produce a bug */}
+        {/* <option value="">Any Difficulty</option>//value is empty - may produce a bug? */}
         <option value="">Any Difficulty</option>
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
@@ -56,6 +54,6 @@ export default function Form({ number, isTimed, handleChange }) {
           </label>
         </div>
       </div>  
-      </form>
+    </form>
   );
 }

@@ -3,7 +3,7 @@ import Intro from "./Intro"
 import  Quiz from "./Quiz"
 import './style.css'
 
-function App() {
+export default function App() {
   const [start, setStart] = useState(false)
   const [userChoices, setUserChoices] = useState({
       number: 5,
@@ -12,22 +12,16 @@ function App() {
       isTimed: true
   })
 
-  function handleUserChoices (number, difficulty, category, banana) {
+  function handleUserChoices (number, difficulty, category, isTimed) {
     setUserChoices({
       ...userChoices,
       number: number,
       difficulty: difficulty,
       category: category,
-      isTimed: banana
+      isTimed: isTimed
     });  
   }
-//this is just used for testing at the moment
-  useEffect(() => {
-    console.log(userChoices)
-  }, [userChoices])
-  //isTimed currently is "undefined"???
-  
-  
+
   function startQuiz() {
     setStart(true)  
   }
@@ -63,4 +57,4 @@ function App() {
   )
 }
 
-export default App;
+

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef} from "react"
+import { useState, useEffect } from "react"
 import Card from "./quiz-components/Card"
 import Timer from "./quiz-components/Timer"
 import Loading from "./quiz-components/Loading"
@@ -11,31 +11,27 @@ export default function Quiz ({ playAgain, number, difficulty, category, isTimed
   const [quizData, setQuizData] = useState([]) 
   const [showAnswers, setShowAnswers] = useState(false)
   const [score, setScore] = useState(0)
-  const [chicken, setChicken] = useState(false) // starts/stops the timer
-  const { width, height } = useWindowSize()
+  const [timerOn, setTimerOn] = useState(false) 
   const [loading, setLoading] = useState(true)
-
+  const { width, height } = useWindowSize()
+  
   useEffect(()=> {
     const loadingTimer = setTimeout(() => {
       setLoading(false)
-      setChicken(true)
+      setTimerOn(true)
     }, 1500);
 
     return () => clearTimeout(loadingTimer); //explain this line?
   }, [])
 
- 
-
   function handleButtonClick () {
     if (showAnswers === false) {
       setShowAnswers(true)
-      setChicken(false)
-      //this will be where calling a  stop timer function  will be called
+      setTimerOn(false)
     } else {
       playAgain()
     } 
   }
-
 
   useEffect(() => {
     fetch(`https://opentdb.com/api.php?amount=${number}&category=${category}&difficulty=${difficulty}&type=multiple`)
@@ -73,7 +69,7 @@ export default function Quiz ({ playAgain, number, difficulty, category, isTimed
     } else if (score >= quizData.length / 2) {
       return `Word up! You scored ${score} out of ${quizData.length}!`
     } else if (score > 0) {
-      return `Oh snap: You scored ${score} out of ${quizData.length}.`
+      return `Oh snap! You scored ${score} out of ${quizData.length}.`
     } else {  
       return `Dang, you scored ${score} out of ${quizData.length}.` 
     }
@@ -84,7 +80,7 @@ export default function Quiz ({ playAgain, number, difficulty, category, isTimed
       <div className="card-subcontainer">
       <span className="card-number">{index + 1})</span>
       <Card
-        key={item.key}
+        key={item.key} // Any reason to pass this? It is not used as a prop.
         question={item.question}
         incorrectAnswers={item.incorrect_answers}
         correctAnswer={item.correct_answer}
@@ -104,7 +100,7 @@ export default function Quiz ({ playAgain, number, difficulty, category, isTimed
         <div> 
           <h2 className="quiz-heading">Quiz time! </h2>
           <h5 className="quiz-subhead">{number} questions total (scroll for more)</h5>
-          { isTimed && <Timer chicken={chicken}/> }
+          { isTimed && <Timer timerOn={timerOn}/> }
           {createCards}
           <div className="button-container">
             <h4>{showAnswers ? renderScore() : ""}</h4>
@@ -113,12 +109,11 @@ export default function Quiz ({ playAgain, number, difficulty, category, isTimed
               onClick={()=>handleButtonClick()}>
                 {showAnswers===false ? "Check answers" : "Play again"}
             </button>
-            </div>
+          </div>
         </div>        
-        } 
+      } 
     </div>
   );
-
 }
   
 

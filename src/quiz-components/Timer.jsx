@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 
-export default function Timer ({ chicken }) {
+export default function Timer ({ timerOn }) {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
     let interval = null;
-    if(chicken) {
+    if(timerOn) {
       interval = setInterval(()=> {
         setTime(prevTime => prevTime + 10)
       }, 10)
@@ -13,7 +13,7 @@ export default function Timer ({ chicken }) {
       clearInterval(interval) //stops the timer
     }
     return () => clearInterval(interval) //cleanup
-  },[chicken])
+  },[timerOn]);
 
 
   return (
@@ -22,5 +22,5 @@ export default function Timer ({ chicken }) {
       <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
     </div>
   )
-}
+};
 

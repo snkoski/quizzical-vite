@@ -3,7 +3,7 @@ import he from 'he' //"html entities" for decoding text
 import { v4 as uuid } from 'uuid'
 
 //each Card represents just a single question and its answers, not the whole quiz
-export default function Card({ key, question, incorrectAnswers, correctAnswer, showAnswers, gotCorrect }) {
+export default function Card({ question, incorrectAnswers, correctAnswer, showAnswers, gotCorrect }) {
   
   const [selectedAnswer, setSelectedAnswer] = useState([]);
   const [allAnswers, setAllAnswers] = useState([
@@ -18,7 +18,7 @@ export default function Card({ key, question, incorrectAnswers, correctAnswer, s
       id: uuid(),
       answeredCorrectly: false
     },
-  ].sort(() => Math.random() - 0.5)) // this allows the sort to run just once. But then setAllAnswers is never used. Okay?
+  ].sort(() => Math.random() - 0.5)); // keeping this in state allows the sort to run just once. But state is never reset. Better way to do this?
 
   useEffect(() => {
     markCorrect(selectedAnswer);
@@ -38,7 +38,7 @@ export default function Card({ key, question, incorrectAnswers, correctAnswer, s
       return "";
     }
   }
-//this is starting to log out now. where you left off. Check console log.
+
   function markCorrect (answer) {
     if (selectedAnswer.answer === answer.answer && answer.isCorrect === true) {
       gotCorrect(true); // call the callback function in Quiz with the gotCorrect value  
@@ -67,7 +67,7 @@ export default function Card({ key, question, incorrectAnswers, correctAnswer, s
         {answer.answer}
       </li>
     ))
-  }
+  };
   
   return (
     <div>
@@ -79,6 +79,6 @@ export default function Card({ key, question, incorrectAnswers, correctAnswer, s
       </div>
     </div> 
   ) 
-}
+};
 
  

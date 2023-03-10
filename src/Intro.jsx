@@ -6,7 +6,7 @@ export default function Intro ({ start, handleUserChoices }) {
   const [number, setNumber] = useState(5);
   const [difficulty, setDifficulty] = useState("")
   const [category, setCategory] = useState("")
-  const [banana, setBanana] = useState(true)
+  const [isTimed, setIsTimed] = useState(true)
   
   const handleChange = (event) => {
     const input = event.target;
@@ -26,28 +26,24 @@ export default function Intro ({ start, handleUserChoices }) {
       setCategory(numValue) 
     }
     if(input.name === "timed") {
-      setBanana(!banana)
-      console.log( {banana} ) // this works
+      setIsTimed(!isTimed)
     }
   };
 
   const handleStart = function () {
     start();
-    handleUserChoices(number, difficulty, category, banana)// correctly updates!
+    handleUserChoices(number, difficulty, category, isTimed)
   }
-  //   do I need event.preventDefault() ???
-
+  // do I need event.preventDefault() ???
 
   return (
     <div className="intro">  
-        <h1>Totally Quizzical</h1>
-        <p className="subhead">A rad way to put your knowlege to the test!</p>
-        <Form
+      <h1>Totally Quizzical</h1>
+      <p className="subhead">A rad way to put your knowlege to the test!</p>
+      <Form
         number={number}
         handleChange={handleChange}
-        // useFormTimer={timerOff}
       />
-        <button className="start-button" onClick={handleStart}>Start quiz</button>
-      
+      <button className="start-button" onClick={handleStart}>Start quiz</button>      
     </div>
   )}
