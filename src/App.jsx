@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Intro from "./Intro"
 import  Quiz from "./Quiz"
 import './style.css'
@@ -10,7 +10,7 @@ export default function App() {
       difficulty: "",
       category: "",
       isTimed: true
-  })
+  });
 
   function handleUserChoices (number, difficulty, category, isTimed) {
     setUserChoices({

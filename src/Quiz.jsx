@@ -6,9 +6,8 @@ import { v4 as uuid } from 'uuid'
 import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
 
-export default function Quiz ({ playAgain, number, difficulty, category, isTimed }) {
-//Holds the quiz object array  
-  const [quizData, setQuizData] = useState([]) 
+export default function Quiz ({ playAgain, number, difficulty, category, isTimed }) {  
+  const [quizData, setQuizData] = useState([]) //Holds the quiz object array
   const [showAnswers, setShowAnswers] = useState(false)
   const [score, setScore] = useState(0)
   const [timerOn, setTimerOn] = useState(false) 
@@ -21,17 +20,8 @@ export default function Quiz ({ playAgain, number, difficulty, category, isTimed
       setTimerOn(true)
     }, 1500);
 
-    return () => clearTimeout(loadingTimer); //explain this line?
+    return () => clearTimeout(loadingTimer); //what does this do?
   }, [])
-
-  function handleButtonClick () {
-    if (showAnswers === false) {
-      setShowAnswers(true)
-      setTimerOn(false)
-    } else {
-      playAgain()
-    } 
-  }
 
   useEffect(() => {
     fetch(`https://opentdb.com/api.php?amount=${number}&category=${category}&difficulty=${difficulty}&type=multiple`)
@@ -46,6 +36,33 @@ export default function Quiz ({ playAgain, number, difficulty, category, isTimed
       );
       console.log(quizData) // shows this is running twice????
   }, []);
+
+  /* Maps over the data in state and passes it to Card as a prop */
+  const createCards = quizData.map((item, index) => (
+    <div className="card-container"> 
+      <div className="card-subcontainer">
+        <span className="card-number">{index + 1})</span>
+        <Card
+          key={item.key} // Any reason to pass this? It is not used as a prop. 
+          question={item.question}
+          incorrectAnswers={item.incorrect_answers}
+          correctAnswer={item.correct_answer}
+          showAnswers={showAnswers}
+          gotCorrect={handleGotCorrect}
+        />
+      </div>
+      <hr></hr>
+    </div>
+  ));
+
+  function handleButtonClick () {
+    if (showAnswers === false) {
+      setShowAnswers(true)
+      setTimerOn(false)
+    } else {
+      playAgain()
+    } 
+  }
 
   //sets the score
   function handleGotCorrect(gotCorrect) {
@@ -75,24 +92,6 @@ export default function Quiz ({ playAgain, number, difficulty, category, isTimed
     }
   }
 
-  const createCards = quizData.map((item, index) => (
-    <div className="card-container"> 
-      <div className="card-subcontainer">
-      <span className="card-number">{index + 1})</span>
-      <Card
-        key={item.key} // Any reason to pass this? It is not used as a prop.
-        question={item.question}
-        incorrectAnswers={item.incorrect_answers}
-        correctAnswer={item.correct_answer}
-        showAnswers={showAnswers}
-        gotCorrect={handleGotCorrect}
-      />
-      </div>
-      <hr></hr>
-    </div>
-  ))
-
-  /* Maps over the data in state and passes question to Card as a prop */
   return (
     <div className="quiz-container">
       { loading ? 
@@ -114,6 +113,6 @@ export default function Quiz ({ playAgain, number, difficulty, category, isTimed
       } 
     </div>
   );
-}
+};
   
 
