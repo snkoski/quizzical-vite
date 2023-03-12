@@ -1,0 +1,78 @@
+.card-container {
+  text-align: left;
+  width: 100%;
+}
+
+.card-subcontainer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.card-number {
+  padding: 16px 10px 0 0;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+
+.answer-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 10px 0 30px;
+  width: 100%;
+}
+
+.answer-button {
+  font-weight: 400;
+  font-size: .75rem;
+  line-height: 1rem;
+  border: .8px #515168 solid;
+  color: #515168;
+  background: white;
+  border-radius: 8px;
+  padding: 5px 15px;
+  width: 175px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center; 
+  cursor: pointer;
+  text-align: center;
+}
+
+.clicked {
+  background: #bdc2da;
+  border: 1.5px #515168 solid;
+}
+.correct {
+  background: #94D7A2;
+  border: .8px #94D7A2 solid;
+  font-weight: 500;
+}
+
+.incorrect {
+  background: #F8BCBC;
+  border: .8px #F8BCBC solid;
+  color: #a6a7aa;
+}
+
+.unselected {
+  color: #a6a7aa;
+  border: .8px #a6a7aa solid;
+}
+
+@media only screen and (min-width: 600px) {
+  .question {
+    font-size: 1.125rem;    
+  }
+
+  .answer-button {
+    width: 148px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;  
+  }
+}

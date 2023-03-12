@@ -1,3 +1,5 @@
+import './form.css'
+
 export default function Form({ number, handleChange }) {
   return (
     <form className="form-container">

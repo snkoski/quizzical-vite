@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import he from 'he' //"html entities" for decoding text
 import { v4 as uuid } from 'uuid'
+import './card.css'
 
 //each Card represents just a single question and its answers, not the whole quiz
 export default function Card({ question, incorrectAnswers, correctAnswer, showAnswers, gotCorrect }) {

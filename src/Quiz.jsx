@@ -5,6 +5,7 @@ import Loading from "./quiz-components/Loading"
 import { v4 as uuid } from 'uuid'
 import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
+import './quiz.css'
 
 export default function Quiz ({ playAgain, number, difficulty, category, isTimed }) {  
   const [quizData, setQuizData] = useState([]) //Holds the quiz object array

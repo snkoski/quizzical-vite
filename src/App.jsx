@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Intro from "./Intro"
 import  Quiz from "./Quiz"
-import './style.css'
 
 export default function App() {
   const [start, setStart] = useState(false)

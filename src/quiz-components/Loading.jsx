@@ -1,4 +1,5 @@
 import loadingSvg from '../assets/loading.svg'
+import './loading.css'
 
 export default function Loading() {
   return (

@@ -1,8 +1,9 @@
 import { useState } from "react"
 import Form from "./intro-components/Form";
+import './intro.css'
 
 export default function Intro ({ start, handleUserChoices }) {
-
+//refactor to set to use setUserChoices
   const [number, setNumber] = useState(5);
   const [difficulty, setDifficulty] = useState("")
   const [category, setCategory] = useState("")
