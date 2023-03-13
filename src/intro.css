@@ -5,13 +5,13 @@
   align-items: center;
   text-align: center;
   margin: auto;
-  padding-top: 60px;
+  padding-top: 50px;
 }
 
 h1 {
   font-family: 'Jura', sans-serif;
   font-weight: 700;
-  font-size: 2.5rem;
+  font-size: 1.875rem;
   color: #2cacd1;
   margin: 0;
 }
@@ -19,8 +19,8 @@ h1 {
 .subhead {
   font-family: 'Karla', sans-serif;
   font-weight: 500;
-  font-size: 1rem;
-  max-width: 80%;
+  font-size: .75rem;
+  max-width: 90%;
 }
 
 .start-button {
@@ -37,6 +37,21 @@ h1 {
   cursor: pointer;
 }
 
+@media only screen and (min-width: 400px) {
+
+  .intro {
+    padding-top: 60px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .subhead {
+    font-size: .875rem;
+    max-width: 80%;
+  }
+}
 
  @media only screen and (min-width: 600px) {
 

@@ -1,15 +1,15 @@
 .quiz-container {
-  padding: 5px 50px 30px;
+  padding: 15px 5px 30px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
+  align-items: flex-start;  
 }
 
 .quiz-heading {
   margin: 30px auto 10px;
   font-family: 'Jura', sans-serif;
   font-weight: 700;
-  font-size: 2.25rem;
+  font-size: 2rem;
   color: #2cacd1;
 }
 
@@ -20,6 +20,7 @@
 .question {
   font-size: 1.125rem; 
   font-weight: 500; 
+ 
 }
 
 hr {
@@ -29,11 +30,12 @@ hr {
 
 .button-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 15px;
   align-items: center;
+  gap: 5px;
   width: 100%;
-  padding: 20px 0 35px;
+  padding: 0 0 35px;
 }
 
 .quiz-button {
@@ -52,7 +54,19 @@ hr {
   .quiz-container {
     padding: 5px 80px 30px;
   }
+
+  .quiz-heading {
+    font-size: 2.25rem;
+  }
+
+  .button-container {
+    flex-direction: row;
+    gap: 15px;
+    padding: 20px 0 35px;
+  }
+
 }
+
 
 
 
