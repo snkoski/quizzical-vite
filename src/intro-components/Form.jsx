@@ -11,8 +11,10 @@ const difficulties = [
   { value: "medium", label: "Medium" },
   { value: "hard", label: "Hard" },
 ];
-export default function Form({ number, handleChange, handleClick }) {
-  const [numberOfQuestions, setNumberOfQuestions] = React.useState(number);
+
+// Quiz options will reset each time the Intro page is rendered
+export default function Form({ startQuiz }) {
+  const [numberOfQuestions, setNumberOfQuestions] = React.useState(2);
   const [difficulty, setDifficulty] = React.useState(difficulties[0].value);
   const [category, setCategory] = React.useState(categories[0].value);
   const [timed, setTimed] = React.useState(true);
@@ -22,8 +24,13 @@ export default function Form({ number, handleChange, handleClick }) {
       className="form-container"
       onSubmit={(event) => {
         event.preventDefault();
-        console.log("Form submitted");
-        handleClick();
+        const options = {
+          numberOfQuestions,
+          difficulty,
+          category,
+          timed,
+        };
+        startQuiz(options);
       }}
     >
       <NumberInput

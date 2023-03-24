@@ -1,119 +1,122 @@
-import { useState, useEffect } from "react"
-import Card from "./quiz-components/Card"
-import Timer from "./quiz-components/Timer"
-import Loading from "./quiz-components/Loading"
-import { v4 as uuid } from 'uuid'
-import useWindowSize from 'react-use/lib/useWindowSize'
-import Confetti from 'react-confetti'
-import './quiz.css'
+import { useEffect, useState } from "react";
+import Card from "./quiz-components/Card";
+import Timer from "./quiz-components/Timer";
+import Loading from "./quiz-components/Loading";
+import { v4 as uuid } from "uuid";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
+import "./quiz.css";
 
-export default function Quiz ({ playAgain, number, difficulty, category, isTimed }) {  
-  const [quizData, setQuizData] = useState([]) //Holds the quiz object array
-  const [showAnswers, setShowAnswers] = useState(false)
-  const [score, setScore] = useState(0)
-  const [timerOn, setTimerOn] = useState(false) 
-  const [loading, setLoading] = useState(true)
-  const { width, height } = useWindowSize()
-  
-  useEffect(()=> {
+export default function Quiz({
+  playAgain,
+  numberOfQuestions,
+  difficulty,
+  category,
+  isTimed,
+}) {
+  const [quizData, setQuizData] = useState([]); //Holds the quiz object array
+  const [showAnswers, setShowAnswers] = useState(false);
+  const [timerOn, setTimerOn] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [answerList, setAnswerList] = useState(
+    Array(numberOfQuestions).fill(false)
+  );
+  const { width, height } = useWindowSize();
+
+  useEffect(() => {
     const loadingTimer = setTimeout(() => {
-      setLoading(false)
-      setTimerOn(true)
+      setLoading(false);
     }, 1500);
 
     return () => clearTimeout(loadingTimer); //what does this do?
-  }, [])
-
-  useEffect(() => {
-    fetch(`https://opentdb.com/api.php?amount=${number}&category=${category}&difficulty=${difficulty}&type=multiple`)
-      .then((res) => res.json())
-      .then((data) =>
-        setQuizData(
-          data.results.map((item) => ({
-            ...item,
-            key: uuid(),
-          }))
-        )
-      );
-      console.log(quizData) // shows this is running twice????
   }, []);
 
-  /* Maps over the data in state and passes it to Card as a prop */
-  const createCards = quizData.map((item, index) => (
-    <div className="card-container"> 
-      <div className="card-subcontainer">
-        <span className="card-number">{index + 1})</span>
-        <Card
-          key={item.key} // Any reason to pass this? It is not used as a prop. 
-          question={item.question}
-          incorrectAnswers={item.incorrect_answers}
-          correctAnswer={item.correct_answer}
-          showAnswers={showAnswers}
-          gotCorrect={handleGotCorrect}
-        />
-      </div>
-      <hr></hr>
-    </div>
-  ));
+  const getQuestions = async () => {
+    const response = await fetch(
+      `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${category}&difficulty=${difficulty}&type=multiple`
+    );
+    const data = await response.json();
 
-  function handleButtonClick () {
+    setQuizData(
+      data.results.map((item) => ({
+        ...item,
+        key: uuid(),
+      }))
+    );
+  };
+
+  useEffect(() => {
+    getQuestions();
+  }, []);
+
+  function handleButtonClick() {
     if (showAnswers === false) {
-      setShowAnswers(true)
-      setTimerOn(false)
+      setShowAnswers(true);
+      setTimerOn(false);
     } else {
-      playAgain()
-    } 
-  }
-
-  //sets the score
-  function handleGotCorrect(gotCorrect) {
-    if(gotCorrect===true) {
-      setScore(score + 1)
+      playAgain();
     }
   }
 
+  //sets the score
+  function handleCheckAnswer(gotCorrect, index) {
+    const nextAnswerList = [...answerList];
+    nextAnswerList[index] = gotCorrect;
+
+    setAnswerList(nextAnswerList);
+  }
+
   // renders the message at the bottom of the screen
-  function renderScore () {
+  function renderScore() {
+    const score = answerList.filter(Boolean).length;
     if (score === quizData.length) {
       return (
         <div>
-          <Confetti 
-            width={width}
-            height={height}
-          />
-          <p>BOO-YAH! You scored {score} out of {quizData.length}!</p>
+          <Confetti width={width} height={height} />
+          <p>
+            BOO-YAH! You scored {score} out of {quizData.length}!
+          </p>
         </div>
-      )
+      );
     } else if (score >= quizData.length / 2) {
-      return `Word up! You scored ${score} out of ${quizData.length}!`
+      return `Word up! You scored ${score} out of ${quizData.length}!`;
     } else if (score > 0) {
-      return `Oh snap! You scored ${score} out of ${quizData.length}.`
-    } else {  
-      return `Dang, you scored ${score} out of ${quizData.length}.` 
+      return `Oh snap! You scored ${score} out of ${quizData.length}.`;
+    } else {
+      return `Dang, you scored ${score} out of ${quizData.length}.`;
     }
   }
 
   return (
     <div className="quiz-container">
-      { loading ? 
-        <Loading /> :  
-        <div> 
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
           <h2 className="quiz-heading">Quiz time! </h2>
-          <h5 className="quiz-subhead">{number} questions total (scroll for more)</h5>
-          { isTimed && <Timer timerOn={timerOn}/> }
-          {createCards}
+          <h5 className="quiz-subhead">
+            {numberOfQuestions === "1"
+              ? `One question`
+              : `${numberOfQuestions} questions total (scroll for more)`}
+          </h5>
+          {isTimed && <Timer timerOn={timerOn} />}
+          {quizData.map((item, index) => (
+            <Card
+              key={item.key} // Any reason to pass this? It is not used as a prop.
+              item={item}
+              showAnswers={showAnswers}
+              isCorrect={handleCheckAnswer}
+              cardNumber={index + 1}
+            />
+          ))}
           <div className="button-container">
             <h4>{showAnswers ? renderScore() : ""}</h4>
-            <button 
-              className="quiz-button" 
-              onClick={()=>handleButtonClick()}>
-                {showAnswers===false ? "Check answers" : "Play again"}
+            <button className="quiz-button" onClick={() => handleButtonClick()}>
+              {showAnswers === false ? "Check answers" : "Play again"}
             </button>
           </div>
-        </div>        
-      } 
+        </>
+      )}
     </div>
   );
-};
-  
-
+}
