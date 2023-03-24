@@ -38,6 +38,7 @@ hr {
   padding: 0 0 35px;
 }
 
+/* duplicate font-weight property*/
 .quiz-button {
   padding: 13px 25px;
   background-color: #2cacd1;
