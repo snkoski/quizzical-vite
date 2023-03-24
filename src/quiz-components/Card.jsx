@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import he from "he"; //"html entities" for decoding text
-import { v4 as uuid } from "uuid";
 import "./card.css";
 
 //each Card represents just a single question and its answers, not the whole quiz
 export default function Card({ item, showAnswers, isCorrect, cardNumber }) {
-  console.log({ item });
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [allAnswers] = useState(
     [item.correct_answer, ...item.incorrect_answers].sort(
@@ -33,20 +31,6 @@ export default function Card({ item, showAnswers, isCorrect, cardNumber }) {
     setSelectedAnswer(allAnswers[index]);
   };
 
-  const renderAnswers = function () {
-    return allAnswers.map((answer, index) => (
-      <li
-        key={index}
-        className={`answer-button 
-          ${selectedAnswer === answer && "clicked"}
-          ${showAnswers && gradeQuiz(answer)}`}
-        onClick={() => handleAnswerClick(index)}
-      >
-        {answer}
-      </li>
-    ));
-  };
-
   return (
     <div className="card-container">
       <div className="card-subcontainer">
@@ -54,7 +38,18 @@ export default function Card({ item, showAnswers, isCorrect, cardNumber }) {
         <div>
           <h3 className="question">{he.decode(item.question)} </h3>
           <div>
-            <ul className="answer-container">{renderAnswers()}</ul>
+            <ul className="answer-container">{allAnswers.map((answer, index) => (
+              <li
+                key={index}
+                className={`answer-button 
+                  ${selectedAnswer === answer && "clicked"}
+                  ${showAnswers && gradeQuiz(answer)}`}
+                onClick={() => handleAnswerClick(index)}
+              >
+                {answer}
+              </li>
+            ))
+            }}</ul>
           </div>
         </div>
       </div>

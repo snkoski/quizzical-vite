@@ -1,8 +1,6 @@
-import { useState } from "react";
 import Form from "./intro-components/Form";
 import "./intro.css";
 import { FormContainer } from "./intro-components/FormContainer";
-import { categories } from "./consts.js";
 
 export default function Intro({ startQuiz, setUserChoices }) {
   const handleStart = function (options) {
