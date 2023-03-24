@@ -1,85 +1,59 @@
-import { useState, useEffect } from 'react'
-import he from 'he' //"html entities" for decoding text
-import { v4 as uuid } from 'uuid'
-import './card.css'
+import { useState, useEffect } from "react";
+import he from "he"; //"html entities" for decoding text
+import "./card.css";
 
 //each Card represents just a single question and its answers, not the whole quiz
-export default function Card({ question, incorrectAnswers, correctAnswer, showAnswers, gotCorrect }) {
-  
-  const [selectedAnswer, setSelectedAnswer] = useState([]);
-  const [allAnswers, setAllAnswers] = useState([
-    ...incorrectAnswers.map(answer => ({
-      answer: he.decode(answer),
-      isCorrect: false,
-      id: uuid(),
-    })),
-    {
-      answer: he.decode(correctAnswer),
-      isCorrect: true,
-      id: uuid(),
-      answeredCorrectly: false
-    },
-  ].sort(() => Math.random() - 0.5)); // keeping this in state allows the sort to run just once. But state is never reset. Better way to do this?
+export default function Card({ item, showAnswers, isCorrect, cardNumber }) {
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [allAnswers] = useState(
+    [item.correct_answer, ...item.incorrect_answers].sort(
+      () => Math.random() - 0.5
+    )
+  );
 
   useEffect(() => {
-    markCorrect(selectedAnswer);
-  }, [selectedAnswer]);
- 
-//else if checks if there is a selected Answer, and if this answer equals the answer that is coming in from the list argument, and if that answer is not correct.
-  function gradeQuiz(answer, state) {
-    if (state===true) {
-      if (answer.isCorrect===true) {
-        return "correct";
-      } else if (selectedAnswer && selectedAnswer.answer === answer.answer && answer.isCorrect === false) {
-        return "incorrect"
-      } else {
-        return "unselected"
-      }
+    if (selectedAnswer === item.correct_answer) {
+      isCorrect(true, cardNumber - 1);
     } else {
-      return "";
+      isCorrect(false, cardNumber - 1);
     }
-  }
+  }, [selectedAnswer]);
 
-  function markCorrect (answer) {
-    if (selectedAnswer.answer === answer.answer && answer.isCorrect === true) {
-      gotCorrect(true); // call the callback function in Quiz with the gotCorrect value  
+  function gradeQuiz(answer) {
+    if (answer === item.correct_answer) {
+      return "correct";
+    } else if (selectedAnswer === answer) {
+      return "incorrect";
     }
   }
 
   const handleAnswerClick = function (index) {
-    const answer = allAnswers[index]; //returns whole object
-    setSelectedAnswer(answer)
+    setSelectedAnswer(allAnswers[index]);
   };
 
-  const renderAnswers = function() {
-    return allAnswers.map((answer, index) => (
-      <li
-        key={answer.id}
-        className={
-          `answer-button 
-          ${selectedAnswer.answer === answer.answer
-            ? "clicked"
-            : ""
-          }
-          ${gradeQuiz(answer, showAnswers)}`
-        }
-        onClick={() => handleAnswerClick(index) }
-      >
-        {answer.answer}
-      </li>
-    ))
-  };
-  
   return (
-    <div>
-       <h3 className="question">{he.decode(question)} </h3>
-      <div>
-        <ul className="answer-container">
-          {renderAnswers()}
-        </ul>
+    <div className="card-container">
+      <div className="card-subcontainer">
+        <span className="card-number">{cardNumber})</span>{" "}
+        <div>
+          <h3 className="question">{he.decode(item.question)} </h3>
+          <div>
+            <ul className="answer-container">{allAnswers.map((answer, index) => (
+              <li
+                key={index}
+                className={`answer-button 
+                  ${selectedAnswer === answer && "clicked"}
+                  ${showAnswers && gradeQuiz(answer)}`}
+                onClick={() => handleAnswerClick(index)}
+              >
+                {answer}
+              </li>
+            ))
+            }}</ul>
+          </div>
+        </div>
       </div>
-    </div> 
-  ) 
-};
-
- 
+      <hr></hr>
+    </div>
+  );
+}
